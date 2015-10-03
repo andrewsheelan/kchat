@@ -6,6 +6,7 @@ gem 'rails', '4.1.13'
 gem 'react-rails', '~> 1.3.1'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'haml-rails', '~> 0.9.0'
+gem 'devise', '~> 3.5.2'
 
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
