@@ -1,3 +1,4 @@
+= current_user.email
 .page-header
   = link_to new_chat_path, class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-plus
@@ -24,3 +25,4 @@
           %td= link_to 'Destroy', chat, data: { confirm: 'Are you sure?' }, method: :delete
 
 = react_component 'Login'
+= react_component 'Chats', chats: @chats

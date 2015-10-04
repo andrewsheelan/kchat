@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.13'
 gem 'react-rails', '~> 1.3.1'
 gem 'bootstrap-generators', '~> 3.3.4'
+gem 'jquery-cssemoticons-rails', '~> 0.0.2'
+gem 'momentjs-rails', '~> 2.10.3'
 gem 'haml-rails', '~> 0.9.0'
 gem 'devise', '~> 3.5.2'
 
@@ -41,5 +43,5 @@ gem 'spring',        group: :development
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'pry', group: [:development, :test]
 

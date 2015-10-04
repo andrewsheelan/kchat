@@ -1,10 +1,11 @@
 class ChatsController < ApplicationController
   before_action :set_chat, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   respond_to :html
 
   def index
-    @chats = Chat.all
+    @chats = Chat.limit(100)
     respond_with(@chats)
   end
 
@@ -22,6 +23,7 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.new(chat_params)
+    @chat.user = current_user
     @chat.save
     respond_with(@chat)
   end
