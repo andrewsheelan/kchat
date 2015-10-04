@@ -23,7 +23,7 @@ class @Chat extends React.Component
         
         React.DOM.div
           style:
-            'border-bottom': '1px dashed #ccc'
-            'padding-bottom' : '20px'
+            borderBottom: '1px dashed #ccc'
+            paddingBottom : '20px'
 #$("#p-#{data.id}").emoticonize { delay: 800, animate: true }
 #chat_body.scrollTop chat_body.prop('scrollHeight') #Scroll chat to the bottom of the feed
