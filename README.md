@@ -21,11 +21,13 @@ http://puma.io
 
 To run locally:
 ----------
- - git clone https://github.com/andrewsheelan/kchat
- - bundle
- - rake db:migrate
- - puma
- - http://localhost:3000
+ ``` unix
+$ git clone https://github.com/andrewsheelan/kchat
+$ bundle
+$ rake db:migrate
+$ puma
+ ```
+ go to url: http://localhost:3000
 
 
 References:
