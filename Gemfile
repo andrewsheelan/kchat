@@ -13,7 +13,8 @@ gem 'devise', '~> 3.5.2'
 gem 'tubesock', '~> 0.2.5'
 gem 'puma'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -46,3 +47,5 @@ gem 'spring',        group: :development
 
 # Use debugger
 gem 'pry', group: [:development, :test]
+gem 'sqlite3', group: [:development, :test]
+gem 'rails_12factor', group: :production
