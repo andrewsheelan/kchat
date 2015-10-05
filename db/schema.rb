@@ -14,13 +14,11 @@
 ActiveRecord::Schema.define(version: 20151003125425) do
 
   create_table "chats", force: true do |t|
-    t.integer  "user_id"
+    t.integer  "user_id",    limit: 255
     t.string   "message"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "chats", ["user_id"], name: "index_chats_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

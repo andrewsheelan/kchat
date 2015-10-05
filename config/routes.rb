@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   root 'home#index'
-  get '/chats/chat' => 'chats#chat'
-  post '/chats/chat' => 'chats#chat'
 
   resources :chats
 

@@ -2,11 +2,10 @@ class @Chats extends React.Component
   constructor: (props) ->
     super props
     @state = props
-    @state.chats = []
 
     pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
     channel = pusher.subscribe('test_channel')
-    channel.bind @state.logged_user.id, (data) =>
+    channel.bind 'test_user', (data) =>
       chats = React.addons.update @state.chats, { $push: [data.chat] }
       @setState chats: chats
       chatBody = $('.chat-body')
@@ -14,6 +13,11 @@ class @Chats extends React.Component
         scrollTop: chatBody.prop('scrollHeight')
       }, 1000
       chatBody.find('p').emoticonize()
+
+  selectedUser: (e) =>
+    selection = $(e.target)
+    @setState selectedUserId: selection.data('id')
+    $('.user-selected').html selection.data('email')
 
   handleSubmit: (e) =>
     e.preventDefault()
@@ -53,10 +57,34 @@ class @Chats extends React.Component
                 className: 'panel-max-min'
                 React.DOM.span
                   className: 'glyphicon glyphicon-comment'
-                  Chat
+                  ' Chat:'
                 React.DOM.span
-                  className: 'user-heading'
-                  Chat
+                  className: 'user-selected'
+                  ' [select]'
+                React.DOM.div
+                  className: 'btn-group pull-right'
+                  React.DOM.button
+                    className: 'btn btn-default btn-xs dropdown-toggle'
+                    type: 'button'
+                    'data-toggle': 'dropdown'
+                    React.DOM.span
+                      className: 'glyphicon glyphicon-chevron-down'
+                  React.DOM.ul
+                    className: 'dropdown-menu slidedown'
+                    if @state.users.length
+                      for user in @state.users
+                        React.DOM.li
+                          className: 'list'
+                          React.DOM.a
+                            className: 'user-select'
+                            href: "#"
+                            onClick: @selectedUser
+                            'data-id': user.id
+                            'data-email': user.email
+                            React.DOM.span
+                              className: 'glyphicon glyphicon-user'
+                            " #{user.email}"
+
             React.DOM.div
               className: 'panel-body'
 

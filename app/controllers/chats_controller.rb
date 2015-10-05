@@ -1,5 +1,4 @@
 class ChatsController < ApplicationController
-  include Tubesock::Hijack
   before_action :set_chat, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
@@ -23,10 +22,8 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @chat = Chat.new(chat_params)
-    @chat.user = current_user
-    @chat.save
-    Pusher.trigger('test_channel', @chat.user_id.to_s, {
+    @chat = Chat.create(chat_params.merge(user_id: current_user.id))
+    Pusher.trigger('test_channel', 'test_user', {
       chat: @chat
     })
 
@@ -43,27 +40,12 @@ class ChatsController < ApplicationController
     respond_with(@chat)
   end
 
-  def chat
-    hijack do |tubesock|
-      tubesock.onopen do
-        tubesock.send_data Chat.limit(100).to_json
-      end
-
-      tubesock.onmessage do |data|
-        chat = Chat.new(message: data)
-        chat.user = current_user
-        chat.save
-        tubesock.send_data chat.to_json
-      end
-    end
-  end
-
   private
     def set_chat
       @chat = Chat.find(params[:id])
     end
 
     def chat_params
-      params.require(:chat).permit(:user_id, :message)
+      params.require(:chat).permit(:message, :user_id)
     end
 end
