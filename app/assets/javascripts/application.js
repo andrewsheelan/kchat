@@ -18,4 +18,6 @@
 //= require components
 //= require moment
 //= require bootstrap
+//= require messenger
+//= require messenger-theme-future
 //= require_tree .

@@ -6,10 +6,12 @@ gem 'rails', '4.1.13'
 gem 'react-rails', '~> 1.3.1'
 gem 'bootstrap-generators', '~> 3.3.4'
 gem 'jquery-cssemoticons-rails', '~> 0.0.2'
+gem "messengerjs-rails", "~> 1.4.1"
 gem 'momentjs-rails', '~> 2.10.3'
 gem 'haml-rails', '~> 0.9.0'
 gem 'devise', '~> 3.5.2'
-
+gem 'tubesock', '~> 0.2.5'
+gem 'puma'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -44,4 +46,3 @@ gem 'spring',        group: :development
 
 # Use debugger
 gem 'pry', group: [:development, :test]
-

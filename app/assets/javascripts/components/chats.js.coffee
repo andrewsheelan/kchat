@@ -5,7 +5,16 @@ class @Chats extends React.Component
 
   handleSubmit: (e) =>
     e.preventDefault()
-    $.post '/chats', { chat: { message: @state.newMessage} }, 'JSON'
+    $.post(
+      '/chats', {
+        chat:
+          message: @state.newMessage
+        },'JSON'
+    ).fail (request, err) ->
+        Messenger().post
+            message: request.responseText
+            type: 'error'
+            showCloseButton: true
 
   valid: =>
     @state.newMessage
@@ -25,7 +34,7 @@ class @Chats extends React.Component
             className: 'panel panel-primary'
             React.DOM.div
               className: 'panel-heading'
-              style: 
+              style:
                 cursor: 'pointer'
               React.DOM.span
                 className: 'panel-max-min'
@@ -40,7 +49,7 @@ class @Chats extends React.Component
 
               React.DOM.div
                 className: 'chat-body clearfix'
-                style: 
+                style:
                   height: '300px'
                   overflow: 'scroll'
                 for chat in @state.chats

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
+  root 'home#index'
   resources :chats
+  get '/chats/chat/:user_id' => 'chats#chat'
+
   resources :people, only: [:show, :index]
-  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}  
+  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

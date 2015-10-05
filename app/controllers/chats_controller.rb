@@ -1,4 +1,5 @@
 class ChatsController < ApplicationController
+  include Tubesock::Hijack
   before_action :set_chat, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
@@ -36,6 +37,18 @@ class ChatsController < ApplicationController
   def destroy
     @chat.destroy
     respond_with(@chat)
+  end
+
+  def chat
+    hijack do |tubesock|
+      tubesock.onopen do
+        tubesock.send_data Chat.limit(100)
+      end
+
+      tubesock.onmessage do |data|
+        tubesock.send_data "You said: #{data}"
+      end
+    end
   end
 
   private

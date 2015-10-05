@@ -6,7 +6,7 @@ class @Chat extends React.Component
   render: ->
     React.DOM.div
       id: "message-#{@state.chat.id}"
-      style: 
+      style:
         color: 'red'
       React.DOM.div
         className: 'header'
@@ -20,7 +20,7 @@ class @Chat extends React.Component
             React.DOM.span
               className: 'glyphicon glyphicon-time'
             ' ' + moment( @state.chat.created_info ).fromNow()
-        
+
         React.DOM.div
           style:
             borderBottom: '1px dashed #ccc'
