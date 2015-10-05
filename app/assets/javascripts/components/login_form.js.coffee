@@ -1,7 +1,7 @@
 class @LoginForm extends React.Component
   constructor: (props)->
     @state = props
-    console.log @state
+
   valid: =>
     $('.login-form-message').removeClass('css-typing').html('')
     @isValidEmail(@state.email) && @isValidPassword(@state.password)
@@ -10,7 +10,7 @@ class @LoginForm extends React.Component
     valid = /^[a-z0-9]+([-._][a-z0-9]+)*@([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,4}$/.test(email) && /^(?=.{1,64}@.{4,64}$)(?=.{6,100}$).*/.test(email)
     $('.login-form-message').
       addClass('css-typing').
-      html('Invalid email') unless valid
+      html('Please enter a valid email.') unless valid
     valid
 
   isValidPassword: (password)->

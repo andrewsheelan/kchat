@@ -1,15 +1,15 @@
-class @Login extends React.Component
+class @Signup extends React.Component
   constructor: (props) ->
     super props
     @state = props
 
   render: ->
     React.DOM.div
-      className: 'modal fade login-modal'
+      className: 'modal fade signup-modal'
       React.DOM.div
         className: 'modal-dialog'
         React.DOM.div
           className: 'modal-content'
           React.DOM.div
              className: 'modal-body'
-             React.createElement LoginForm, setupUserData: @state.setupUserData
+             React.createElement SignupForm, setupUserData: @state.setupUserData

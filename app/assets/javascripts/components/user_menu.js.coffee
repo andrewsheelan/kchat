@@ -2,17 +2,21 @@ class @UserMenu extends React.Component
   constructor: (props) ->
     super props
     @state = logged_user: ''
-    console.log @state.logged_user
 
   setupUserData: (data)=>
     @setState logged_user: data
-    console.log data
 
   openSignin: (e)=>
     e.preventDefault()
-    $('.modal').modal('show')
+    $('.login-modal').modal('show').on 'shown.bs.modal',
+      -> $(this).find('input:text:visible:first').focus()
 
-  signoff: (e) =>
+  openSignup: (e)=>
+    e.preventDefault()
+    $('.signup-modal').modal('show').on 'shown.bs.modal',
+      -> $(this).find('input:text:visible:first').focus()
+
+  logout: (e) =>
     e.preventDefault()
     $.ajax(
       url: '/users/sign_out'
@@ -61,21 +65,25 @@ class @UserMenu extends React.Component
             className: 'collapse navbar-collapse'
             id: 'navbar'
             React.DOM.ul
-              className: 'nav navbar-nav'
+              className: 'nav navbar-nav pull-right'
               React.DOM.li
                 className: (if @state.logged_user then 'hide' else '')
                 React.DOM.a
                   href: '#'
                   onClick: @openSignin
-                  'signin'
+                  'Signin'
               React.DOM.li
                 className: (if @state.logged_user then 'hide' else '')
-                React.DOM.a href: '#', 'signup'
+                React.DOM.a
+                  href: '#'
+                  onClick: @openSignup
+                  'Signup'
               React.DOM.li
                 className: (if @state.logged_user then '' else 'hide')
                 React.DOM.a
                   href: '#'
-                  onClick: @signoff
-                  'signoff'
+                  onClick: @logout
+                  'Logout'
       React.createElement Login, setupUserData: @setupUserData
+      React.createElement Signup, setupUserData: @setupUserData
       React.createElement Chats if @state.logged_user
