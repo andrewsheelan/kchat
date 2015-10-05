@@ -46,7 +46,6 @@ class ChatsController < ApplicationController
       end
 
       tubesock.onmessage do |data|
-        pp "#{data}"
         chat = Chat.new(message: data)
         chat.user = current_user
         chat.save
