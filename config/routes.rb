@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
+  get '/chats/chat' => 'chats#chat'
+  post '/chats/chat' => 'chats#chat'
+
   resources :chats
-  get '/chats/chat/:user_id' => 'chats#chat'
 
   resources :people, only: [:show, :index]
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}

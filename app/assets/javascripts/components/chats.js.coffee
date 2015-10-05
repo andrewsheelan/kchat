@@ -1,26 +1,32 @@
 class @Chats extends React.Component
   constructor: (props) ->
     super props
-    @state = props
+    @state = chats: []
+    @ws = new WebSocket("ws://" + location.host + "/chats/chat")
+    @ws.onmessage = (e) =>
+      chatBody = $(".chat-body")
+      scrollSpeed = 0
+      chats = $.parseJSON e.data
+      unless chats.length
+        chats = React.addons.update @state.chats, { $push: [chats] }
+        scrollSpeed = 1000
+
+      @setState chats: chats
+      chatBody.animate {
+        scrollTop: chatBody.prop('scrollHeight')
+      }, scrollSpeed
+      chatBody.find('p').emoticonize()
 
   handleSubmit: (e) =>
     e.preventDefault()
-    $.post(
-      '/chats', {
-        chat:
-          message: @state.newMessage
-        },'JSON'
-    ).fail (request, err) ->
-        Messenger().post
-            message: request.responseText
-            type: 'error'
-            showCloseButton: true
+    @ws.send(@state.newMessage)
+    $('.chat-message-bar').val ''
 
   valid: =>
     @state.newMessage
 
   handleChange: (e) =>
-    @setState "newMessage": e.target.value
+    @setState newMessage: e.target.value
 
   render: ->
     React.DOM.div
@@ -52,14 +58,15 @@ class @Chats extends React.Component
                 style:
                   height: '300px'
                   overflow: 'scroll'
-                for chat in @state.chats
-                  React.createElement Chat, chat: chat, key: chat.id
+                if @state.chats.length
+                  for chat in @state.chats
+                    React.createElement Chat, chat: chat, key: chat.id
             React.DOM.div
               className: 'panel-footer'
               React.DOM.div
                 className: 'input-group'
                 React.DOM.input
-                  className: 'form-control input-sm'
+                  className: 'form-control input-sm chat-message-bar'
                   type: 'text'
                   name: 'message'
                   onChange: @handleChange

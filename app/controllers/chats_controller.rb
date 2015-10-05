@@ -42,11 +42,15 @@ class ChatsController < ApplicationController
   def chat
     hijack do |tubesock|
       tubesock.onopen do
-        tubesock.send_data Chat.limit(100)
+        tubesock.send_data Chat.limit(100).to_json
       end
 
       tubesock.onmessage do |data|
-        tubesock.send_data "You said: #{data}"
+        pp "#{data}"
+        chat = Chat.new(message: data)
+        chat.user = current_user
+        chat.save
+        tubesock.send_data chat.to_json
       end
     end
   end

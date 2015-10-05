@@ -69,3 +69,4 @@ class @UserMenu extends React.Component
                   onClick: @signoff
                   'signoff'
       React.createElement Login
+      React.createElement Chats

@@ -15,4 +15,5 @@
  *= require messenger
  *= require messenger-spinner
  *= require messenger-theme-future
+ *= require jquery.cssemoticons
  */
