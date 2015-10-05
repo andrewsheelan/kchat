@@ -21,9 +21,13 @@ http://puma.io
 References:
 ----------
 http://blog.andrewray.me/how-to-set-up-devise-ajax-authentication-with-rails-4-0/
+
 https://github.com/plataformatec/devise
+
 https://www.airpair.com/reactjs/posts/reactjs-a-guide-for-rails-developers
+
 https://intercityup.com/blog/streaming-data-with-actioncontroller-live.html
+
 https://devcenter.heroku.com/articles/getting-started-with-rails4
 
 Parallax
