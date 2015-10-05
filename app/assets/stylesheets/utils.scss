@@ -14,3 +14,34 @@
 @-webkit-keyframes type{
     from { width: 0; }
 }
+
+.img-circle {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+
+.sidebar-wrapper {
+    .sidebar-nav {
+        width: 100px;
+        height: 100%;
+        -webkit-transition: all 2s;
+        transition: all 0.5s;
+    }
+
+    .sidebar-nav:hover {
+        background-color: grey;
+    }
+    .img-circle:hover {
+        .item-email {
+            display: inline;
+        }
+    }
+}
+
+.item {
+    margin-bottom: 10px;
+    .item-email{
+        display: none;
+    }
+}

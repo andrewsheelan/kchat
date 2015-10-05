@@ -84,8 +84,7 @@ class @UserMenu extends React.Component
                   href: '#'
                   onClick: @logout
                   'Logout'
+      React.createElement Sidebar, users: @state.users if @state.logged_user
       React.createElement Login, setupUserData: @setupUserData
       React.createElement Signup, setupUserData: @setupUserData
-      React.createElement Chats,
-              logged_user: @state.logged_user,
-              users: @state.users, chats: [] if @state.logged_user
+      React.createElement Chats, logged_user: @state.logged_user, users: @state.users, chats: [] if @state.logged_user
