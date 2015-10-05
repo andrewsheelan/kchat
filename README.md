@@ -30,6 +30,12 @@ $ puma
  go to url: http://localhost:3000
 
 
+
+Like I said, this is a WIP, miles to go before this can be any useful.
+
+I would be glad if this code can help someone, in someway, trying to start using this technology with Rails. Hit me up with any questions!
+
+
 References:
 ----------
 http://blog.andrewray.me/how-to-set-up-devise-ajax-authentication-with-rails-4-0/
@@ -44,11 +50,6 @@ https://devcenter.heroku.com/articles/getting-started-with-rails4
 
 Parallax
 https://www.youtube.com/watch?v=Z6tEvtQ6E7U
-
-
-Like I said, this is a WIP, miles to go before this can be any useful.
-
-I would be glad if this code can help someone, in someway, trying to start using this technology with Rails. Hit me up with any questions!
 
 
 
