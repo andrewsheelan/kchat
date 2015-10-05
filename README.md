@@ -34,6 +34,16 @@ Parallax
 https://www.youtube.com/watch?v=Z6tEvtQ6E7U
 
 
-Like I said, this is a WIP, miles to go before this can be real useful.
+Like I said, this is a WIP, miles to go before this can be any useful.
 
 I would be glad if this code can help someone, in someway, trying to start using this technology with Rails. Hit me up with any questions!
+
+
+
+
+
+
+
+
+
+> *Love suffers long and is kind; love does not envy; love does not parade itself, is not puffed up; does not behave rudely, does not seek its own, is not provoked, thinks no evil; does not rejoice in iniquity, but rejoices in the truth; bears all things, believes all things, hopes all things, endures all things. Love never fails. But whether there are prophecies, they will fail; whether there are tongues, they will cease; whether there is knowledge, it will vanish away. -  Corinthians 13:4-8 New King James Version (NKJV)*
