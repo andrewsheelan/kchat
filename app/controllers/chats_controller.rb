@@ -26,7 +26,11 @@ class ChatsController < ApplicationController
     @chat = Chat.new(chat_params)
     @chat.user = current_user
     @chat.save
-    respond_with(@chat)
+    Pusher.trigger('test_channel', @chat.user_id.to_s, {
+      chat: @chat
+    })
+
+    render nothing: true
   end
 
   def update

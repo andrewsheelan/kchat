@@ -21,4 +21,5 @@
 //= require bootstrap
 //= require messenger
 //= require messenger-theme-future
+//= require pusher.min
 //= require_tree .

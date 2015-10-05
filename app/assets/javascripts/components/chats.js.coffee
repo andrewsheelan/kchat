@@ -1,26 +1,32 @@
 class @Chats extends React.Component
   constructor: (props) ->
     super props
-    @state = chats: []
-    ws_protocol = if 'https:'==document.location.protocol then 'wss' else 'ws'
-    @ws = new WebSocket("#{ws_protocol}://#{location.host}/chats/chat")
-    @ws.onmessage = (e) =>
-      chatBody = $(".chat-body")
-      scrollSpeed = 0
-      chats = $.parseJSON e.data
-      unless chats.length
-        chats = React.addons.update @state.chats, { $push: [chats] }
-        scrollSpeed = 1000
+    @state = props
+    @state.chats = []
 
+    pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
+    channel = pusher.subscribe('test_channel')
+    channel.bind @state.logged_user.id, (data) =>
+      chats = React.addons.update @state.chats, { $push: [data.chat] }
       @setState chats: chats
+      chatBody = $('.chat-body')
       chatBody.animate {
         scrollTop: chatBody.prop('scrollHeight')
-      }, scrollSpeed
+      }, 1000
       chatBody.find('p').emoticonize()
 
   handleSubmit: (e) =>
     e.preventDefault()
-    @ws.send(@state.newMessage)
+    $.post(
+      '/chats', {
+        chat:
+          message: @state.newMessage
+        },'JSON'
+    ).fail (request, err) ->
+        Messenger().post
+            message: request.responseText
+            type: 'error'
+            showCloseButton: true
     $('.chat-message-bar').val ''
 
   valid: =>

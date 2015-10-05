@@ -9,8 +9,8 @@ https://aqueous-wave-4723.herokuapp.com/
 Gems:
 - Coffee script for creating React Components
 
-- Tubesock for Websockets for the Polling
-https://github.com/ngauthier/tubesock
+- Pusher
+https://dashboard.pusher.com
 
 - Bootstrap
 http://getbootstrap.com/

@@ -86,4 +86,4 @@ class @UserMenu extends React.Component
                   'Logout'
       React.createElement Login, setupUserData: @setupUserData
       React.createElement Signup, setupUserData: @setupUserData
-      React.createElement Chats if @state.logged_user
+      React.createElement Chats, logged_user: @state.logged_user if @state.logged_user

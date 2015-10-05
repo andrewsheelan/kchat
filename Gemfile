@@ -11,6 +11,7 @@ gem 'momentjs-rails', '~> 2.10.3'
 gem 'haml-rails', '~> 0.9.0'
 gem 'devise', '~> 3.5.2'
 gem 'tubesock', '~> 0.2.5'
+gem 'pusher', '~> 0.14.5'
 gem 'puma'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
