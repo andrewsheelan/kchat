@@ -1,9 +1,7 @@
 class @LoginForm extends React.Component
   constructor: (props)->
-    @state =
-      email: ''
-      password: ''
-
+    @state = props
+    console.log @state
   valid: =>
     $('.login-form-message').removeClass('css-typing').html('')
     @isValidEmail(@state.email) && @isValidPassword(@state.password)
@@ -34,8 +32,9 @@ class @LoginForm extends React.Component
           password: @state.password
           remember_me: 1
       }, (
-        (data) ->
-          console.log data
+        (data) =>
+          console.log @state
+          @state.setupUserData(data)
           return
       ), 'json'
     ).fail((request, err) ->
@@ -43,7 +42,7 @@ class @LoginForm extends React.Component
           message: $.parseJSON(request.responseText).error
           type: 'error'
           showCloseButton: true
-    ).success((data, textStatus, xhr) ->
+    ).success((data, textStatus, xhr) =>
       csrf_param = xhr.getResponseHeader('X-CSRF-Param')
       csrf_token = xhr.getResponseHeader('X-CSRF-Token')
       $("meta[name='csrf-param']").attr('content', csrf_param) if csrf_param

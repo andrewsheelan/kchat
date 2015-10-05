@@ -10,7 +10,6 @@ class @Login extends React.Component
         className: 'modal-dialog'
         React.DOM.div
           className: 'modal-content'
-          React.DOM.div 
+          React.DOM.div
              className: 'modal-body'
-             React.createElement LoginForm
-
+             React.createElement LoginForm, setupUserData: @state.setupUserData
