@@ -4,7 +4,9 @@ WIP
 My very first React on Rails!!!!
 
 Here's a demo of what this can do so far:
+----------
 https://aqueous-wave-4723.herokuapp.com/
+
 
 - Coffee script for creating React Components
 
@@ -16,6 +18,14 @@ http://getbootstrap.com/
 
 - puma
 http://puma.io
+
+To run locally:
+----------
+ - git clone https://github.com/andrewsheelan/kchat
+ - bundle
+ - rake db:migrate
+ - puma
+ - http://localhost:3000
 
 
 References:
