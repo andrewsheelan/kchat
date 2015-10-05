@@ -1,7 +1,7 @@
 class @UserMenu extends React.Component
   constructor: (props) ->
     super props
-    @state = logged_user: ''
+    @state = props
 
   setupUserData: (data)=>
     @setState logged_user: data

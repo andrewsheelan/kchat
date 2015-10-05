@@ -2,7 +2,8 @@ class @Chats extends React.Component
   constructor: (props) ->
     super props
     @state = chats: []
-    @ws = new WebSocket("wss://" + location.host + "/chats/chat")
+    ws_protocol = if 'https:'==document.location.protocol then 'wss' else 'ws'
+    @ws = new WebSocket("#{ws_protocol}://#{location.host}/chats/chat")
     @ws.onmessage = (e) =>
       chatBody = $(".chat-body")
       scrollSpeed = 0
