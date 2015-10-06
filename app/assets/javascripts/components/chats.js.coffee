@@ -14,6 +14,10 @@ class @Chats extends React.Component
       }, 1000
       chatBody.find('p').emoticonize()
 
+  componentDidMount: ->
+    $('.chat-div').draggable()
+    @hideThisChat()
+
   selectedUser: (e) =>
     selection = $(e.target)
     @setState selectedUserId: selection.data('id')
@@ -33,6 +37,9 @@ class @Chats extends React.Component
             showCloseButton: true
     $('.chat-message-bar').val ''
 
+  hideThisChat: (e) ->
+    $('.chat-div').hide()
+
   valid: =>
     @state.newMessage
 
@@ -41,7 +48,7 @@ class @Chats extends React.Component
 
   render: ->
     React.DOM.div
-      className: 'container'
+      className: 'container chat-div'
       React.DOM.form
         onSubmit: @handleSubmit
         className: 'form-inline'
@@ -57,34 +64,15 @@ class @Chats extends React.Component
                 className: 'panel-max-min'
                 React.DOM.span
                   className: 'glyphicon glyphicon-comment'
-                  ' Chat:'
                 React.DOM.span
                   className: 'user-selected'
                   ' [select]'
-                React.DOM.div
-                  className: 'btn-group pull-right'
-                  React.DOM.button
-                    className: 'btn btn-default btn-xs dropdown-toggle'
-                    type: 'button'
-                    'data-toggle': 'dropdown'
-                    React.DOM.span
-                      className: 'glyphicon glyphicon-chevron-down'
-                  React.DOM.ul
-                    className: 'dropdown-menu slidedown'
-                    if @state.users.length
-                      for user in @state.users
-                        React.DOM.li
-                          className: 'list'
-                          React.DOM.a
-                            className: 'user-select'
-                            href: "#"
-                            onClick: @selectedUser
-                            'data-id': user.id
-                            'data-email': user.email
-                            React.DOM.span
-                              className: 'glyphicon glyphicon-user'
-                            " #{user.email}"
-
+                React.DOM.a
+                  href: '#'
+                  className: 'text-warning pull-right'
+                  onClick: @hideThisChat
+                  React.DOM.span
+                    className: 'glyphicon glyphicon-remove'
             React.DOM.div
               className: 'panel-body'
 

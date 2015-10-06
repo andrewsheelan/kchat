@@ -3,6 +3,15 @@ class @Sidebar extends React.Component
     super props
     @state = props
 
+  componentDidMount: ->
+    $('[data-toggle="tooltip"]').tooltip()
+
+  showThisChat: (e) ->
+    e.preventDefault()
+    selection = $(e.target)
+    $('.user-selected').html " #{selection.data('original-title')}"
+    $('.chat-div').show()
+
   render: ->
     React.DOM.div
       className: 'wrapper'
@@ -20,9 +29,10 @@ class @Sidebar extends React.Component
               className: 'item'
               React.DOM.a
                 href: '#'
+                onClick: @showThisChat
                 React.DOM.img
                   className: 'img-circle'
                   src: "//www.gravatar.com/avatar/#{user.md5}"
-                React.DOM.span
-                  className: 'item-email'
-                  " #{user.email}"
+                  'data-toggle': 'tooltip'
+                  'data-placement': 'right'
+                  title: user.email

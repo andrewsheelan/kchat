@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.13'
 gem 'react-rails', '~> 1.3.1'
 gem 'bootstrap-generators', '~> 3.3.4'
+gem 'jquery-ui-rails', '~> 5.0.5'
 gem 'jquery-cssemoticons-rails', '~> 0.0.2'
 gem "messengerjs-rails", "~> 1.4.1"
 gem 'momentjs-rails', '~> 2.10.3'

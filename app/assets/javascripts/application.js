@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require jquery.cssemoticons
 //= require turbolinks
 //= require react
@@ -22,4 +23,5 @@
 //= require messenger
 //= require messenger-theme-future
 //= require pusher.min
+//= require jquery.lazyload.min
 //= require_tree .
