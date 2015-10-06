@@ -62,3 +62,22 @@ body {
     border-right-color: red;
     opacity: 0.5;
 }
+.navbar-inverse .navbar-nav > .open > a,
+.navbar-inverse .navbar-nav > .open > a:hover,
+.navbar-inverse .navbar-nav > .open > a:focus {
+    background-color: #eee;
+}
+
+.chat-body::-webkit-scrollbar {
+    width: 0 !important;
+}
+.chat-body {
+    margin-right: -30px;
+    padding-right: 30px;
+    overflow: auto;
+    height: 300px;
+    overflow-y: scroll;
+}
+.chat-body-panel {
+    overflow: hidden;
+}

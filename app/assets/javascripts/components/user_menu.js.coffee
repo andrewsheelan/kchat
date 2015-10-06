@@ -66,24 +66,54 @@ class @UserMenu extends React.Component
             id: 'navbar'
             React.DOM.ul
               className: 'nav navbar-nav pull-right'
-              React.DOM.li
-                className: (if @state.logged_user then 'hide' else '')
-                React.DOM.a
-                  href: '#'
-                  onClick: @openSignin
-                  'Signin'
-              React.DOM.li
-                className: (if @state.logged_user then 'hide' else '')
-                React.DOM.a
-                  href: '#'
-                  onClick: @openSignup
-                  'Signup'
-              React.DOM.li
-                className: (if @state.logged_user then '' else 'hide')
-                React.DOM.a
-                  href: '#'
-                  onClick: @logout
-                  'Logout'
+              if !@state.logged_user
+                React.DOM.li
+                  className: ''
+                  React.DOM.a
+                    href: '#'
+                    onClick: @openSignin
+                    'Signin'
+              if !@state.logged_user
+                React.DOM.li
+                  className: ''
+                  React.DOM.a
+                    href: '#'
+                    onClick: @openSignup
+                    'Signup'
+              if @state.logged_user
+                React.DOM.li
+                  className: 'dropdown user-prof-menu'
+                  React.DOM.a
+                    href: '#'
+                    'data-toggle': 'dropdown'
+                    React.DOM.img
+                      src: "//www.gravatar.com/avatar/#{@state.logged_user.md5}"
+                      style:
+                        width: '50px'
+                        borderRadius: '50%'
+                        marginBottom: '-20px'
+                        marginTop: '-20px'
+                        marginLeft: '20px'
+                    React.DOM.b
+                      className: "caret"
+                    React.DOM.ul
+                      className: 'dropdown-menu'
+                      React.DOM.li
+                        className: ''
+                        React.DOM.a
+                          href: '#'
+                          'Profile'
+                      React.DOM.li
+                        className: ''
+                        React.DOM.a
+                          href: '#'
+                          onClick: @logout
+                          'Logout'
+      if @state.logged_user
+        React.DOM.div
+          className: 'pull-right'
+          "Welcome #{@state.logged_user.email}..."
+
       React.createElement Sidebar, users: @state.users if @state.logged_user
       React.createElement Login, setupUserData: @setupUserData
       React.createElement Signup, setupUserData: @setupUserData

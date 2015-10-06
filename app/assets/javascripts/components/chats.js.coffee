@@ -74,13 +74,10 @@ class @Chats extends React.Component
                   React.DOM.span
                     className: 'glyphicon glyphicon-remove'
             React.DOM.div
-              className: 'panel-body'
+              className: 'panel-body chat-body-panel'
 
               React.DOM.div
                 className: 'chat-body clearfix'
-                style:
-                  height: '300px'
-                  overflow: 'scroll'
                 if @state.chats.length
                   for chat in @state.chats
                     React.createElement Chat, chat: chat, key: chat.id
