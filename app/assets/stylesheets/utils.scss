@@ -4,6 +4,9 @@ body {
     font-family: 'Josefin Slab', serif;
     background-image: asset-url('bg.png');
 }
+.navbar-brand {
+    background-image: asset-url('favicon.ico');
+}
 .navbar {
     border-top: 1px grey solid;
     border-bottom: 1px grey solid;
@@ -48,4 +51,14 @@ body {
 
 .item {
     margin-bottom: 10px;
+}
+
+.img-circle + .tooltip > .tooltip-inner {
+    background-color: red;
+    padding-left: 0px;
+    opacity: 0.5;
+}
+.img-circle + .tooltip > .tooltip-arrow {
+    border-right-color: red;
+    opacity: 0.5;
 }

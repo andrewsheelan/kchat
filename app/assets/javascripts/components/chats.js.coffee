@@ -59,7 +59,7 @@ class @Chats extends React.Component
             React.DOM.div
               className: 'panel-heading'
               style:
-                cursor: 'pointer'
+                cursor: 'move'
               React.DOM.span
                 className: 'panel-max-min'
                 React.DOM.span
