@@ -79,6 +79,14 @@ body {
     height: 300px;
     overflow-y: scroll;
 }
+
 .chat-body-panel {
     overflow: hidden;
+}
+
+.chat-div {
+    z-index: 100;
+}
+.chat-div:hover{
+    z-index: 1000;
 }

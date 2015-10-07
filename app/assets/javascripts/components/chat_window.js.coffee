@@ -1,4 +1,4 @@
-class @Chats extends React.Component
+class @ChatWindow extends React.Component
   constructor: (props) ->
     super props
     @state = props
@@ -15,8 +15,8 @@ class @Chats extends React.Component
       chatBody.find('p').emoticonize()
 
   componentDidMount: ->
-    $('.chat-div').draggable({grid: [ 50, 20 ]})
-    @hideThisChat()
+    $('.chat-div').draggable()
+    @showThisChat(true)
 
   selectedUser: (e) =>
     selection = $(e.target)
@@ -37,8 +37,13 @@ class @Chats extends React.Component
             showCloseButton: true
     $('.chat-message-bar').val ''
 
-  hideThisChat: (e) ->
-    $('.chat-div').hide()
+  showThisChat: (show) =>
+    chatWindow = @state.chatWindow
+    chatWindow.show = show
+    @setState chatWindow: chatWindow
+
+  hideThisChat: (e) =>
+    @showThisChat(false)
 
   valid: =>
     @state.newMessage
@@ -48,7 +53,7 @@ class @Chats extends React.Component
 
   render: ->
     React.DOM.div
-      className: 'container chat-div'
+      className: "container chat-div #{if @state.chatWindow.show then '' else 'hide' }"
       React.DOM.form
         onSubmit: @handleSubmit
         className: 'form-inline'
@@ -66,7 +71,7 @@ class @Chats extends React.Component
                   className: 'glyphicon glyphicon-comment'
                 React.DOM.span
                   className: 'user-selected'
-                  ' [select]'
+                  @state.chatWindow.email
                 React.DOM.a
                   href: '#'
                   className: 'text-warning pull-right'

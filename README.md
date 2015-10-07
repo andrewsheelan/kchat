@@ -21,12 +21,15 @@ http://puma.io
 
 To run locally:
 ----------
+NOTE: create a free account in pusher and update config/initializers/pusher.rb For more info: https://pusher.com/
+
  ``` unix
 $ git clone https://github.com/andrewsheelan/kchat
 $ bundle
 $ rake db:migrate
 $ puma
  ```
+
  go to url: http://localhost:3000
 
 

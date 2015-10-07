@@ -1,5 +1,7 @@
 class Chat < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :typed_by, foreign_key: :user_id, class_name: 'User'
+  serialize :conversation, Array
+
   def as_json(options={})
     super only: [:id, :message, :created_at], include: {
       user: {:only => :email}

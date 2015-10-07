@@ -6,11 +6,15 @@ class @Sidebar extends React.Component
   componentDidMount: ->
     $('[data-toggle="tooltip"]').tooltip()
 
-  showThisChat: (e) ->
+  showThisChat: (e) =>
     e.preventDefault()
     selection = $(e.target)
-    $('.user-selected').html " #{selection.data('original-title')}"
-    $('.chat-div').show()
+    chatWindow =
+      email: selection.data('email')
+      id: selection.data('id')
+      show: true
+
+    @state.setupChatWindows(chatWindow)
 
   render: ->
     React.DOM.div
@@ -25,14 +29,4 @@ class @Sidebar extends React.Component
               href: '#'
               'Users'
           for user in @state.users
-            React.DOM.li
-              className: 'item'
-              React.DOM.a
-                href: '#'
-                onClick: @showThisChat
-                React.DOM.img
-                  className: 'img-circle'
-                  src: "//www.gravatar.com/avatar/#{user.md5}"
-                  'data-toggle': 'tooltip'
-                  'data-placement': 'right'
-                  title: user.email
+            React.createElement SidebarIcon, key: user.id, user: user, showThisChat: @showThisChat

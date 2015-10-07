@@ -16,7 +16,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    = react_component 'UserMenu', logged_user: current_user, users: User.all
+    = react_component 'App', logged_user: current_user, users: User.all, chatWindows: []
     -# .container
     -#   - flash.each do |name, msg|
     -#     = content_tag :div, class: "alert alert-#{name == :error ? "danger" : "success" } alert-dismissable", role: "alert" do
