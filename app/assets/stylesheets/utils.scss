@@ -3,6 +3,7 @@
 body {
     font-family: 'Josefin Slab', serif;
     background-image: asset-url('bg.png');
+    overflow-x: hidden;
 }
 .navbar-brand {
     background-image: asset-url('favicon.ico');

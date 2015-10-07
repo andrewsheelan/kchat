@@ -15,7 +15,7 @@ class @Chats extends React.Component
       chatBody.find('p').emoticonize()
 
   componentDidMount: ->
-    $('.chat-div').draggable()
+    $('.chat-div').draggable({grid: [ 50, 20 ]})
     @hideThisChat()
 
   selectedUser: (e) =>
