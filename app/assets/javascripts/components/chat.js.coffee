@@ -7,12 +7,12 @@ class @Chat extends React.Component
     React.DOM.div
       id: "message-#{@state.chat.id}"
       style:
-        color: 'red'
+        color: if @state.chat.enabled then 'red' else ''
       React.DOM.div
         className: 'header'
         React.DOM.strong
           className: 'primary-font'
-          @state.chat.user.email
+          @state.chat.typed_by.email
         React.DOM.p null, @state.chat.message
         React.DOM.div
           className: 'pull-right  small text-muted'

@@ -13,6 +13,10 @@ class ChatsController < ApplicationController
     respond_with(@chat)
   end
 
+  def show
+    respond_with(@chat)
+  end
+
   def new
     @chat = Chat.new
     respond_with(@chat)
@@ -28,6 +32,28 @@ class ChatsController < ApplicationController
     })
 
     render nothing: true
+  end
+
+  def create_chat_with
+    @chat = Chat.new(chat_params)
+    @chat.user_id = current_user.id.to_i
+    @chat.conversation = [
+      @chat.user_id,
+      params[:other_user_id].to_i
+    ].sort
+
+    Pusher.trigger("channel-#{params[:user_id]}", "event-#{params[:other_user_id]}", {
+      chat: @chat
+    }) if @chat.save
+
+    render nothing: true
+  end
+
+  def chats_with
+    render json: Chat.where(conversation: [
+      params[:user_id].to_i,
+      params[:other_user_id].to_i
+    ].sort.to_yaml)
   end
 
   def update

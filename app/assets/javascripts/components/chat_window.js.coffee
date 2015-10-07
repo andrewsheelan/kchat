@@ -2,40 +2,27 @@ class @ChatWindow extends React.Component
   constructor: (props) ->
     super props
     @state = props
-
+    @chatUrl = "/chats/#{@state.logged_user.id}/with/#{@state.chatWindow.id}"
+    @chatBodyCss = ".chat-panel-#{@state.chatWindow.id} .chat-body"
+    console.log @chatBodyCss
     pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
-    channel = pusher.subscribe('test_channel')
-    channel.bind 'test_user', (data) =>
+    channel = pusher.subscribe("channel-#{@state.logged_user.id}")
+    channel.bind "event-#{@state.chatWindow.id}", (data) =>
+      data.chat.enabled = true
       chats = React.addons.update @state.chats, { $push: [data.chat] }
       @setState chats: chats
-      chatBody = $('.chat-body')
+      chatBody = $(@chatBodyCss)
       chatBody.animate {
         scrollTop: chatBody.prop('scrollHeight')
       }, 1000
       chatBody.find('p').emoticonize()
 
   componentDidMount: ->
-    $('.chat-div').draggable()
+    $(".chat-panel-#{@state.chatWindow.id}").draggable()
     @showThisChat(true)
-
-  selectedUser: (e) =>
-    selection = $(e.target)
-    @setState selectedUserId: selection.data('id')
-    $('.user-selected').html selection.data('email')
-
-  handleSubmit: (e) =>
-    e.preventDefault()
-    $.post(
-      '/chats', {
-        chat:
-          message: @state.newMessage
-        },'JSON'
-    ).fail (request, err) ->
-        Messenger().post
-            message: request.responseText
-            type: 'error'
-            showCloseButton: true
-    $('.chat-message-bar').val ''
+    $.get @chatUrl, (chats) =>
+      @setState chats: chats
+      $(@chatBodyCss).scrollTop $(@chatBodyCss).prop('scrollHeight')
 
   showThisChat: (show) =>
     chatWindow = @state.chatWindow
@@ -45,61 +32,37 @@ class @ChatWindow extends React.Component
   hideThisChat: (e) =>
     @showThisChat(false)
 
-  valid: =>
-    @state.newMessage
-
-  handleChange: (e) =>
-    @setState newMessage: e.target.value
-
   render: ->
     React.DOM.div
-      className: "container chat-div #{if @state.chatWindow.show then '' else 'hide' }"
-      React.DOM.form
-        onSubmit: @handleSubmit
-        className: 'form-inline'
+      className: "container chat-div chat-panel-#{@state.chatWindow.id} #{if @state.chatWindow.show then '' else 'hide' }"
+      React.DOM.div
+        className: 'col-md-4 col-lg-3 col-sm-4'
         React.DOM.div
-          className: 'col-md-4 col-lg-3 col-sm-4'
+          className: 'panel panel-primary'
           React.DOM.div
-            className: 'panel panel-primary'
-            React.DOM.div
-              className: 'panel-heading'
-              style:
-                cursor: 'move'
+            className: 'panel-heading'
+            style:
+              cursor: 'move'
+            React.DOM.span
+              className: 'panel-max-min'
               React.DOM.span
-                className: 'panel-max-min'
+                className: 'glyphicon glyphicon-comment'
+              React.DOM.span
+                className: 'user-selected'
+                @state.chatWindow.email
+              React.DOM.a
+                href: '#'
+                className: 'text-warning pull-right'
+                onClick: @hideThisChat
                 React.DOM.span
-                  className: 'glyphicon glyphicon-comment'
-                React.DOM.span
-                  className: 'user-selected'
-                  @state.chatWindow.email
-                React.DOM.a
-                  href: '#'
-                  className: 'text-warning pull-right'
-                  onClick: @hideThisChat
-                  React.DOM.span
-                    className: 'glyphicon glyphicon-remove'
+                  className: 'glyphicon glyphicon-remove'
+          React.DOM.div
+            className: 'panel-body chat-body-panel'
             React.DOM.div
-              className: 'panel-body chat-body-panel'
-
-              React.DOM.div
-                className: 'chat-body clearfix'
-                if @state.chats.length
-                  for chat in @state.chats
-                    React.createElement Chat, chat: chat, key: chat.id
-            React.DOM.div
-              className: 'panel-footer'
-              React.DOM.div
-                className: 'input-group'
-                React.DOM.input
-                  className: 'form-control input-sm chat-message-bar'
-                  type: 'text'
-                  name: 'message'
-                  onChange: @handleChange
-                  placeholder: 'Type your message here...'
-                React.DOM.span
-                  className: 'input-group-btn'
-                  React.DOM.input
-                    className: 'btn btn-warning btn-sm'
-                    value: 'Send'
-                    disabled: !@valid()
-                    type: 'submit'
+              className: 'chat-body clearfix'
+              if @state.chats.length
+                for chat in @state.chats
+                  React.createElement Chat, chat: chat, key: chat.id
+          React.DOM.div
+            className: 'panel-footer'
+            React.createElement ChatForm, chatUrl: @chatUrl, key: 'chat_form'

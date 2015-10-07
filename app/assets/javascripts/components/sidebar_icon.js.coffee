@@ -3,7 +3,7 @@ class @SidebarIcon extends React.Component
     super props
     @state = props
 
-  render: =>
+  render: ->
     React.DOM.li
       className: 'item'
       React.DOM.a

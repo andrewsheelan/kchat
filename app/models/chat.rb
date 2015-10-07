@@ -3,8 +3,8 @@ class Chat < ActiveRecord::Base
   serialize :conversation, Array
 
   def as_json(options={})
-    super only: [:id, :message, :created_at], include: {
-      user: {:only => :email}
+    super only: [:id, :message, :created_at, :conversation], include: {
+      typed_by: {:only => :email}
     }, methods: :created_info
   end
   def created_info

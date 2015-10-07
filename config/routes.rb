@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  post 'chats/:user_id/with/:other_user_id' => 'chats#create_chat_with'
+  get 'chats/:user_id/with/:other_user_id' => 'chats#chats_with'
+
   resources :chats
 
   resources :people, only: [:show, :index]
