@@ -1,7 +1,9 @@
 # kchat
 WIP
 
-My very first React on Rails!!!!
+My very first React on Rails!!!! 
+
+Still working on poping up when someone pings..
 
 Here's a demo of what this can do so far:
 ----------
