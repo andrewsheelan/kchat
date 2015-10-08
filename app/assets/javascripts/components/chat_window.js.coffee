@@ -19,22 +19,22 @@ class @ChatWindow extends React.Component
 
   componentDidMount: ->
     $(".chat-panel-#{@state.chatWindow.id}").draggable()
-    @showThisChat(true)
+    @showThisChat
     $.get @chatUrl, (chats) =>
       @setState chats: chats
       $(@chatBodyCss).scrollTop $(@chatBodyCss).prop('scrollHeight')
 
-  showThisChat: (show) =>
-    chatWindow = @state.chatWindow
-    chatWindow.show = show
-    @setState chatWindow: chatWindow
+  showThisChat: =>
+    @hideThisChat(true)
 
-  hideThisChat: (e) =>
-    @showThisChat(false)
+  hideThisChat: (show) =>
+    windowOpen = ".chat-panel-#{@state.chatWindow.id}"
+    if $(windowOpen).length
+      $(windowOpen).toggle(show)
 
   render: ->
     React.DOM.div
-      className: "container chat-div chat-panel-#{@state.chatWindow.id} #{if @state.chatWindow.show then '' else 'hide' }"
+      className: "container chat-div chat-panel-#{@state.chatWindow.id} #{ @state.chatWindow.show }"
       React.DOM.div
         className: 'col-md-4 col-lg-3 col-sm-4'
         React.DOM.div

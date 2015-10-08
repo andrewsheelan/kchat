@@ -9,12 +9,16 @@ class @Sidebar extends React.Component
   showThisChat: (e) =>
     e.preventDefault()
     selection = $(e.target)
-    chatWindow =
-      email: selection.data('email')
-      id: selection.data('id')
-      show: true
+    windowOpen = ".chat-panel-#{selection.data('id')}"
+    if $(windowOpen).length
+      $(windowOpen).toggle(true)
+    else
+      chatWindow =
+        email: selection.data('email')
+        id: selection.data('id')
+        show: true
 
-    @state.setupChatWindows(chatWindow)
+      @state.setupChatWindows(chatWindow)
 
   render: ->
     React.DOM.div
