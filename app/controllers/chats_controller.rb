@@ -42,7 +42,7 @@ class ChatsController < ApplicationController
       params[:other_user_id].to_i
     ].sort
 
-    Pusher.trigger("channel-#{params[:user_id]}", "event-#{params[:other_user_id]}", {
+    Pusher.trigger(["channel-#{params[:user_id]}", "channel-#{params[:other_user_id]}"], "event-#{Chat.last.conversation.join(',')}", {
       chat: @chat
     }) if @chat.save
 

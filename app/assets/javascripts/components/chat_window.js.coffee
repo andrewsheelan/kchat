@@ -4,10 +4,10 @@ class @ChatWindow extends React.Component
     @state = props
     @chatUrl = "/chats/#{@state.logged_user.id}/with/#{@state.chatWindow.id}"
     @chatBodyCss = ".chat-panel-#{@state.chatWindow.id} .chat-body"
-    console.log @chatBodyCss
+    @eventName = "event-#{[ @state.logged_user.id, @state.chatWindow.id ].sort().join()}"
     pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
     channel = pusher.subscribe("channel-#{@state.logged_user.id}")
-    channel.bind "event-#{@state.chatWindow.id}", (data) =>
+    channel.bind @eventName, (data) =>
       data.chat.enabled = true
       chats = React.addons.update @state.chats, { $push: [data.chat] }
       @setState chats: chats
