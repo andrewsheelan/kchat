@@ -24,17 +24,24 @@ class @ChatWindow extends React.Component
       @setState chats: chats
       $(@chatBodyCss).scrollTop $(@chatBodyCss).prop('scrollHeight')
 
-  showThisChat: =>
-    @hideThisChat(true)
+  hideThisChat: =>
+    @showThisChat(true)
 
-  hideThisChat: (show) =>
+  showThisChat: (hide) =>
     windowOpen = ".chat-panel-#{@state.chatWindow.id}"
     if $(windowOpen).length
-      $(windowOpen).toggle(show)
+      @bringToFront()
+      $(windowOpen).toggle(!hide)
+
+  bringToFront: =>
+    windowOpen = ".chat-panel-#{@state.chatWindow.id}"
+    $('.chat-div').css('z-index', '100')
+    $(windowOpen).css('z-index', '101')
 
   render: ->
     React.DOM.div
-      className: "container chat-div chat-panel-#{@state.chatWindow.id} #{ @state.chatWindow.show }"
+      className: "container chat-div chat-panel-#{@state.chatWindow.id}"
+      onClick: @bringToFront
       React.DOM.div
         className: 'col-md-4 col-lg-3 col-sm-4'
         React.DOM.div

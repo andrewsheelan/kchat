@@ -11,7 +11,7 @@ class @Sidebar extends React.Component
     selection = $(e.target)
     windowOpen = ".chat-panel-#{selection.data('id')}"
     if $(windowOpen).length
-      $(windowOpen).toggle(true)
+      $(windowOpen).toggle()
     else
       chatWindow =
         email: selection.data('email')
