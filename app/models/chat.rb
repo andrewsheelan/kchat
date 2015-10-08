@@ -4,7 +4,7 @@ class Chat < ActiveRecord::Base
 
   def as_json(options={})
     super only: [:id, :message, :created_at, :conversation], include: {
-      typed_by: {:only => :email}
+      typed_by: {:only => [:id, :email]}
     }, methods: :created_info
   end
   def created_info

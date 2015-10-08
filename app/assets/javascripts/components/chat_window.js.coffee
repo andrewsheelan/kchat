@@ -8,7 +8,6 @@ class @ChatWindow extends React.Component
     pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
     channel = pusher.subscribe("channel-#{@state.logged_user.id}")
     channel.bind @eventName, (data) =>
-      data.chat.enabled = true
       chats = React.addons.update @state.chats, { $push: [data.chat] }
       @setState chats: chats
       chatBody = $(@chatBodyCss)
@@ -19,15 +18,15 @@ class @ChatWindow extends React.Component
 
   componentDidMount: ->
     $(".chat-panel-#{@state.chatWindow.id}").draggable()
-    @showThisChat
+    @toggleThisChat
     $.get @chatUrl, (chats) =>
       @setState chats: chats
       $(@chatBodyCss).scrollTop $(@chatBodyCss).prop('scrollHeight')
 
   hideThisChat: =>
-    @showThisChat(true)
+    @toggleThisChat(true)
 
-  showThisChat: (hide) =>
+  toggleThisChat: (hide) =>
     windowOpen = ".chat-panel-#{@state.chatWindow.id}"
     if $(windowOpen).length
       @bringToFront()
@@ -69,7 +68,7 @@ class @ChatWindow extends React.Component
               className: 'chat-body clearfix'
               if @state.chats.length
                 for chat in @state.chats
-                  React.createElement Chat, chat: chat, key: chat.id
+                  React.createElement Chat, chat: chat, key: chat.id, chatWindowCreated: @state.chatWindow.created
           React.DOM.div
             className: 'panel-footer'
             React.createElement ChatForm, chatUrl: @chatUrl, key: 'chat_form'

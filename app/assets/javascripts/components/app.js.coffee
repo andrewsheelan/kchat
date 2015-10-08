@@ -2,6 +2,25 @@ class @App extends React.Component
   constructor: (props) ->
     super props
     @state = props
+    pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
+    channel = pusher.subscribe("channel-#{@state.logged_user.id}")
+    channel.bind_all (event, data) =>
+      if data.chat && data.chat.typed_by.id != @state.logged_user.id
+        @openSelectedChat data.chat.typed_by.id, data.chat.typed_by.email
+
+  openSelectedChat: (id, email) =>
+    windowOpen = ".chat-panel-#{id}"
+    if $(windowOpen).length
+      $(windowOpen).toggle(true)
+    else
+      date = new Date()
+      date.setSeconds( date.getSeconds() - 2 )
+      chatWindow =
+        id: id
+        email: email
+        created: date
+
+      @setupChatWindows(chatWindow)
 
   setupUserData: (data)=>
     @setState logged_user: data
@@ -116,7 +135,7 @@ class @App extends React.Component
           className: 'pull-right'
           "Welcome #{@state.logged_user.email}..."
 
-      React.createElement Sidebar, setupChatWindows: @setupChatWindows, users: @state.users, logged_user: @state.logged_user if @state.logged_user
+      React.createElement Sidebar, openSelectedChat: @openSelectedChat, users: @state.users, logged_user: @state.logged_user if @state.logged_user
       React.createElement Login, setupUserData: @setupUserData
       React.createElement Signup, setupUserData: @setupUserData
       if @state.logged_user

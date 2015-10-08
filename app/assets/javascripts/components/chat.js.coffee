@@ -7,7 +7,7 @@ class @Chat extends React.Component
     React.DOM.div
       id: "message-#{@state.chat.id}"
       style:
-        color: if @state.chat.enabled then 'red' else ''
+        color: if @state.chat.created_info > @state.chatWindowCreated then 'red' else ''
       React.DOM.div
         className: 'header'
         React.DOM.strong
