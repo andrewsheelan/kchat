@@ -2,11 +2,6 @@ class @App extends React.Component
   constructor: (props) ->
     super props
     @state = props
-    pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
-    channel = pusher.subscribe("channel-#{@state.logged_user.id}")
-    channel.bind_all (event, data) =>
-      if data.chat && data.chat.typed_by.id != @state.logged_user.id
-        @openSelectedChat data.chat.typed_by.id, data.chat.typed_by.email
 
   openSelectedChat: (id, email) =>
     windowOpen = ".chat-panel-#{id}"
@@ -24,6 +19,12 @@ class @App extends React.Component
 
   setupUserData: (data)=>
     @setState logged_user: data
+    pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
+    channel = pusher.subscribe("channel-#{@state.logged_user.id}")
+    channel.bind_all (event, data) =>
+      if data.chat && data.chat.typed_by.id != @state.logged_user.id
+        @openSelectedChat data.chat.typed_by.id, data.chat.typed_by.email
+
 
   setupChatWindows: (chatWindow)=>
     chatWindows = React.addons.update @state.chatWindows, { $push: [chatWindow] }
