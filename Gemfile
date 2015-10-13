@@ -50,3 +50,4 @@ gem 'spring',        group: :development
 gem 'pry', group: [:development, :test]
 gem 'sqlite3', group: [:development, :test]
 gem 'rails_12factor', group: :production
+gem 'web-console' #, group: [:development, :test] # Adding for debugging purposes only.. super dangerous to keep it for prod
