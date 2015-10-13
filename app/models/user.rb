@@ -12,7 +12,8 @@ class User < ActiveRecord::Base
     {
       id: id,
       email: email,
-      img_src: "//www.gravatar.com/avatar/#{md5}?d=wavatar"
+      img_src: "//www.gravatar.com/avatar/#{md5}?d=wavatar",
+      online: Pusher.get("/channels/presence-#{id}")[:occupied]
     }
   end
 end

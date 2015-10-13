@@ -33,7 +33,6 @@ class @LoginForm extends React.Component
           remember_me: 1
       }, (
         (data) =>
-          console.log @state
           @state.setupUserData(data)
           return
       ), 'json'

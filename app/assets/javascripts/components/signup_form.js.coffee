@@ -35,7 +35,6 @@ class @SignupForm extends React.Component
           password_confirmation: @state.passwordConfirmation
       }, (
         (data) =>
-          console.log @state
           @state.setupUserData(data)
           return
       ), 'json'

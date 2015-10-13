@@ -5,6 +5,13 @@ class @Sidebar extends React.Component
 
   componentDidMount: ->
     $('[data-toggle="tooltip"]').tooltip()
+    setInterval(( =>
+      $.get '/people', (users) =>
+        @updateUsers(users)
+    ), 10000 )
+
+  updateUsers: (users)=>
+    @setState users: users
 
   showThisChat: (e) =>
     e.preventDefault()
@@ -25,4 +32,18 @@ class @Sidebar extends React.Component
               'Users'
           for user in @state.users
             if user.id != @state.logged_user.id
-              React.createElement SidebarIcon, key: user.id, user: user, showThisChat: @showThisChat
+              React.DOM.li
+                className: 'item'
+                React.DOM.a
+                  href: '#'
+                  onClick: @showThisChat
+                  'data-id': user.id
+                  'data-email': user.email
+                  React.DOM.img
+                    className: "img-circle online-#{ user.online}"
+                    src: user.img_src
+                    'data-toggle': 'tooltip'
+                    'data-placement': 'right'
+                    'data-id': user.id
+                    'data-email': user.email
+                    title: user.email

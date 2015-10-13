@@ -5,8 +5,8 @@ class PeopleController < ApplicationController
   respond_to :html
 
   def index
-    @people = User.all
-    respond_with(@people)
+    @users = User.all
+    render json: @users
   end
 
   def show

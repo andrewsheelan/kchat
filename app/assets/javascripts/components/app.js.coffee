@@ -3,6 +3,15 @@ class @App extends React.Component
     super props
     @state = props
 
+    @subscribeAllEvents() if @state.logged_user
+
+  subscribeAllEvents: =>
+    @pusherAllEvents = new Pusher('debbd1d094d68128387e', encrypted: true, authEndpoint: '/home/presence_auth' )
+    channel = @pusherAllEvents.subscribe("presence-#{@state.logged_user.id}")
+    channel.bind_all (event, data) =>
+      if data.chat && data.chat.typed_by.id != @state.logged_user.id
+        @openSelectedChat data.chat.typed_by.id, data.chat.typed_by.email
+
   openSelectedChat: (id, email) =>
     windowOpen = ".chat-panel-#{id}"
     if $(windowOpen).length
@@ -19,11 +28,7 @@ class @App extends React.Component
 
   setupUserData: (data)=>
     @setState logged_user: data
-    pusher = new Pusher('debbd1d094d68128387e', encrypted: true, authEndpoint: '/home/presence_auth' )
-    channel = pusher.subscribe("presence-#{@state.logged_user.id}")
-    channel.bind_all (event, data) =>
-      if data.chat && data.chat.typed_by.id != @state.logged_user.id
-        @openSelectedChat data.chat.typed_by.id, data.chat.typed_by.email
+    @subscribeAllEvents()
 
   setupChatWindows: (chatWindow)=>
     chatWindows = React.addons.update @state.chatWindows, { $push: [chatWindow] }
@@ -49,6 +54,7 @@ class @App extends React.Component
       csrf_token = xhr.getResponseHeader('X-CSRF-Token')
       $("meta[name='csrf-param']").attr('content', csrf_param) if csrf_param
       $("meta[name='csrf-token']").attr('content', csrf_token) if csrf_token
+      @pusherAllEvents.unsubscribe("presence-#{@state.logged_user.id}")
       @setState logged_user: ''
       Messenger().post
         message: 'Successfully Logged out..'

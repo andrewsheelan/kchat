@@ -90,3 +90,8 @@ body {
 .chat-div:hover{
     z-index: 1000;
 }
+
+img.online-false {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
