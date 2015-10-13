@@ -5,7 +5,7 @@ class ChatsController < ApplicationController
   respond_to :html
 
   def index
-    @chats = Chat.includes(:user).limit(100)
+    @chats = Chat.includes(:user)
     respond_with(@chats)
   end
 

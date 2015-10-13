@@ -68,7 +68,7 @@ class @ChatWindow extends React.Component
             React.DOM.div
               className: 'chat-body clearfix'
               if @state.chats.length
-                for chat in @state.chats.sort( (a,b) -> (if a.online then -1 else 1))
+                for chat in @state.chats
                   React.createElement Chat, chat: chat, key: chat.id, chatWindowCreated: @state.chatWindow.created
           React.DOM.div
             className: 'panel-footer'
