@@ -27,10 +27,6 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.create(chat_params.merge(user_id: current_user.id))
-    Pusher.trigger('test_channel', 'test_user', {
-      chat: @chat
-    })
-
     render nothing: true
   end
 
@@ -42,7 +38,7 @@ class ChatsController < ApplicationController
       params[:other_user_id].to_i
     ].sort
 
-    Pusher.trigger(["channel-#{params[:user_id]}", "channel-#{params[:other_user_id]}"], "event-#{Chat.last.conversation.join(',')}", {
+    Pusher.trigger(["presence-#{params[:user_id]}", "presence-#{params[:other_user_id]}"], "event-#{Chat.last.conversation.join(',')}", {
       chat: @chat
     }) if @chat.save
 

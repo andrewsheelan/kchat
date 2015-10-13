@@ -13,7 +13,7 @@ class @SidebarIcon extends React.Component
         'data-email': @state.user.email
         React.DOM.img
           className: 'img-circle'
-          src: "//www.gravatar.com/avatar/#{@state.user.md5}?d=wavatar"
+          src: @state.user.img_src
           'data-toggle': 'tooltip'
           'data-placement': 'right'
           'data-id': @state.user.id

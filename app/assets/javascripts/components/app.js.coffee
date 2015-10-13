@@ -19,12 +19,11 @@ class @App extends React.Component
 
   setupUserData: (data)=>
     @setState logged_user: data
-    pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
-    channel = pusher.subscribe("channel-#{@state.logged_user.id}")
+    pusher = new Pusher('debbd1d094d68128387e', encrypted: true, authEndpoint: '/home/presence_auth' )
+    channel = pusher.subscribe("presence-#{@state.logged_user.id}")
     channel.bind_all (event, data) =>
       if data.chat && data.chat.typed_by.id != @state.logged_user.id
         @openSelectedChat data.chat.typed_by.id, data.chat.typed_by.email
-
 
   setupChatWindows: (chatWindow)=>
     chatWindows = React.addons.update @state.chatWindows, { $push: [chatWindow] }
@@ -109,7 +108,7 @@ class @App extends React.Component
                   href: '#'
                   'data-toggle': 'dropdown'
                   React.DOM.img
-                    src: "//www.gravatar.com/avatar/#{@state.logged_user.md5}?d=wavatar"
+                    src: @state.logged_user.img_src
                     style:
                       width: '50px'
                       borderRadius: '50%'

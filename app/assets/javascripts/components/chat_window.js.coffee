@@ -5,8 +5,8 @@ class @ChatWindow extends React.Component
     @chatUrl = "/chats/#{@state.logged_user.id}/with/#{@state.chatWindow.id}"
     @chatBodyCss = ".chat-panel-#{@state.chatWindow.id} .chat-body"
     @eventName = "event-#{[ @state.logged_user.id, @state.chatWindow.id ].sort().join()}"
-    pusher = new Pusher('debbd1d094d68128387e', encrypted: true)
-    channel = pusher.subscribe("channel-#{@state.logged_user.id}")
+    pusher = new Pusher('debbd1d094d68128387e', encrypted: true, authEndpoint: '/home/presence_auth' )
+    channel = pusher.subscribe("presence-#{@state.logged_user.id}")
     channel.bind @eventName, (data) =>
       chats = React.addons.update @state.chats, { $push: [data.chat] }
       @setState chats: chats

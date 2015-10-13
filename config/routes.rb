@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post 'chats/:user_id/with/:other_user_id' => 'chats#create_chat_with'
   get 'chats/:user_id/with/:other_user_id' => 'chats#chats_with'
 
+  match 'home/presence_auth', via: [:get, :post]
+
   resources :chats
 
   resources :people, only: [:show, :index]

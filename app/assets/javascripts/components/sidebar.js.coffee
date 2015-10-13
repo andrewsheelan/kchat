@@ -24,4 +24,5 @@ class @Sidebar extends React.Component
               href: '#'
               'Users'
           for user in @state.users
-            React.createElement SidebarIcon, key: user.id, user: user, showThisChat: @showThisChat
+            if user.id != @state.logged_user.id
+              React.createElement SidebarIcon, key: user.id, user: user, showThisChat: @showThisChat
