@@ -7,6 +7,7 @@ Here's a demo of what this can do so far:
 ----------
 https://aqueous-wave-4723.herokuapp.com/
 
+The Avatar is pulled off of Gravatar. smilies are added too.. ;)
 
 - Coffee script for creating React Components
 
@@ -51,7 +52,13 @@ https://intercityup.com/blog/streaming-data-with-actioncontroller-live.html
 
 https://devcenter.heroku.com/articles/getting-started-with-rails4
 
-Parallax
+https://github.com/kainage/jquery-cssemoticons-rails
+
+https://en.gravatar.com/site/implement/images/
+
+
+
+Parallax(not used)
 https://www.youtube.com/watch?v=Z6tEvtQ6E7U
 
 

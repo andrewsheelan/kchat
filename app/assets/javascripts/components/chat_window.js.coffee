@@ -14,7 +14,7 @@ class @ChatWindow extends React.Component
       chatBody.animate {
         scrollTop: chatBody.prop('scrollHeight')
       }, 1000
-      chatBody.find('p').emoticonize()
+      chatBody.find('p:last').emoticonize { animate: true, delay: 1000 }
 
   componentDidMount: ->
     $(".chat-panel-#{@state.chatWindow.id}").draggable()
@@ -22,6 +22,7 @@ class @ChatWindow extends React.Component
     $.get @chatUrl, (chats) =>
       @setState chats: chats
       $(@chatBodyCss).scrollTop $(@chatBodyCss).prop('scrollHeight')
+      $(@chatBodyCss).find('p').emoticonize()
 
   hideThisChat: =>
     @toggleThisChat(true)

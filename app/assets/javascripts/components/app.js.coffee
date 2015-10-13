@@ -109,7 +109,7 @@ class @App extends React.Component
                   href: '#'
                   'data-toggle': 'dropdown'
                   React.DOM.img
-                    src: "//www.gravatar.com/avatar/#{@state.logged_user.md5}"
+                    src: "//www.gravatar.com/avatar/#{@state.logged_user.md5}?d=mm"
                     style:
                       width: '50px'
                       borderRadius: '50%'
