@@ -5,7 +5,7 @@ class PeopleController < ApplicationController
   respond_to :html
 
   def index
-    @users = User.all
+    @users = User.all_sorted
     render json: @users
   end
 

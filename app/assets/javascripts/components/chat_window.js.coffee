@@ -6,7 +6,7 @@ class @ChatWindow extends React.Component
     @chatBodyCss = ".chat-panel-#{@state.chatWindow.id} .chat-body"
     @eventName = "event-#{[ @state.logged_user.id, @state.chatWindow.id ].sort().join()}"
     pusher = new Pusher('debbd1d094d68128387e', encrypted: true, authEndpoint: '/home/presence_auth' )
-    channel = pusher.subscribe("presence-#{@state.logged_user.id}")
+    channel = pusher.subscribe(@state.logged_user.channel)
     channel.bind @eventName, (data) =>
       chats = React.addons.update @state.chats, { $push: [data.chat] }
       @setState chats: chats
@@ -68,7 +68,7 @@ class @ChatWindow extends React.Component
             React.DOM.div
               className: 'chat-body clearfix'
               if @state.chats.length
-                for chat in @state.chats
+                for chat in @state.chats.sort( (a,b) -> (if a.online then -1 else 1))
                   React.createElement Chat, chat: chat, key: chat.id, chatWindowCreated: @state.chatWindow.created
           React.DOM.div
             className: 'panel-footer'

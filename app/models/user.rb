@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   before_save :create_md5
+
+  CHANNEL_PREFIX = 'presence-'
+
   def create_md5
     self.md5 = Digest::MD5.hexdigest(self.email)
   end
@@ -13,7 +16,17 @@ class User < ActiveRecord::Base
       id: id,
       email: email,
       img_src: "//www.gravatar.com/avatar/#{md5}?d=wavatar",
-      online: Pusher.get("/channels/presence-#{id}")[:occupied]
+      channel: channel,
+      online: Pusher.get("/channels/#{channel}")[:occupied]
     }
+  end
+
+  def channel
+    "#{CHANNEL_PREFIX}#{id}"
+  end
+
+  def self.all_sorted
+    json_hash = all.as_json
+    json_hash.sort_by{ |hash| hash[:online].to_s }.reverse
   end
 end
