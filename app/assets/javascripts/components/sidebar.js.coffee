@@ -12,6 +12,7 @@ class @Sidebar extends React.Component
 
   updateUsers: (users)=>
     @setState users: users
+    $('[data-toggle="tooltip"]').tooltip()
 
   showThisChat: (e) =>
     e.preventDefault()
@@ -46,4 +47,5 @@ class @Sidebar extends React.Component
                     'data-placement': 'right'
                     'data-id': user.id
                     'data-email': user.email
+                    'data-original-title': user.email
                     title: user.email
