@@ -15,6 +15,7 @@ gem 'pusher'
 gem 'puma'
 # Use sqlite3 as the database for Active Record
 gem 'pg'
+gem 'sprockets', '~> 3.7.2'
 
 # Use SCSS for stylesheets
 gem 'sass-rails'
