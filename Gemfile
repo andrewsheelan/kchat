@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails'
-gem 'react-rails'
+gem 'react-rails', '2.3.1'
 gem 'bootstrap-generators'
 gem 'jquery-ui-rails'
 gem 'jquery-cssemoticons-rails'

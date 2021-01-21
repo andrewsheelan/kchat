@@ -27,7 +27,7 @@ class ChatsController < ApplicationController
 
   def create
     @chat = Chat.create(chat_params.merge(user_id: current_user.id))
-    render nothing: true
+    head :ok, content_type: "text/html"
   end
 
   def create_chat_with
@@ -42,7 +42,7 @@ class ChatsController < ApplicationController
       chat: @chat
     }) if @chat.save
 
-    render nothing: true
+    head :ok, content_type: "text/html"
   end
 
   def chats_with

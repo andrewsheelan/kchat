@@ -186,7 +186,7 @@ GEM
       thor (~> 1.0)
     rake (13.0.3)
     rdoc (6.3.0)
-    react-rails (2.6.1)
+    react-rails (2.3.1)
       babel-transpiler (>= 0.7.0)
       connection_pool
       execjs
@@ -261,7 +261,7 @@ DEPENDENCIES
   pusher
   rails
   rails_12factor
-  react-rails
+  react-rails (= 2.3.1)
   sass-rails
   sdoc
   spring
