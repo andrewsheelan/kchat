@@ -18,7 +18,7 @@ class @ChatForm extends React.Component
         },'JSON'
     ).fail (request, err) ->
         Messenger().post
-            message: request.responseText
+            message: $.parseJSON(request.responseText).errors
             type: 'error'
             showCloseButton: true
     @setState newMessage: ''
