@@ -49,7 +49,7 @@ class ChatsController < ApplicationController
     render json: Chat.where(conversation: [
       params[:user_id].to_i,
       params[:other_user_id].to_i
-    ].sort.to_yaml)
+    ].sort)
   end
 
   def update

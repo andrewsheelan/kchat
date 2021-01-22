@@ -53,7 +53,7 @@ class @ChatWindow extends React.Component
             React.DOM.span
               className: 'panel-max-min'
               React.DOM.span
-                className: 'glyphicon glyphicon-comment'
+                className: 'glyphicon glyphicon-comment user-selected-icon'
               React.DOM.span
                 className: 'user-selected'
                 @state.chatWindow.email
