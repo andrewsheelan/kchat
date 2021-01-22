@@ -38,7 +38,7 @@ class @LoginForm extends React.Component
       ), 'json'
     ).fail((request, err) ->
       Messenger().post
-          message: strfy($.parseJSON(request.responseText).errors)
+          message: $.parseJSON(request.responseText).error
           type: 'error'
           showCloseButton: true
     ).success((data, textStatus, xhr) =>
