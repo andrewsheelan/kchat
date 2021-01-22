@@ -5,7 +5,7 @@ My very first React on Rails!!!!
 
 Here's a demo of what this can do so far:
 ----------
-https://aqueous-wave-4723.herokuapp.com/
+https://kchatme.herokuapp.com/
 
 The Avatar is pulled off of Gravatar. smilies are added too.. ;)
 
