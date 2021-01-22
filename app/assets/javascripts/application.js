@@ -25,3 +25,11 @@
 //= require pusher.min
 //= require jquery.lazyload.min
 //= require_tree .
+
+function strfy(obj){
+  var str = "";
+  for (const [key, value] of Object.entries(obj)) {
+    str +=  ` ${key.split("_").join(" ")}: ${value}. `;
+  }
+  return str
+}
