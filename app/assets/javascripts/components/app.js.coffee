@@ -114,7 +114,7 @@ class @App extends React.Component
                   href: '#'
                   'data-toggle': 'dropdown'
                   onClick: @logout
-                  React.span 'Logout '
+                  React.DOM.span 'Logout '
                   React.DOM.img
                     src: @state.logged_user.img_src
                     style:
